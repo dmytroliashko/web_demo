@@ -1,6 +1,7 @@
 extern crate gotham;
 extern crate hyper;
 extern crate mime;
+extern crate dotenv;
 
 #[macro_use]
 extern crate gotham_derive;
@@ -13,6 +14,9 @@ mod controllers;
 
 use gotham::state::State;
 use crate::route::router;
+use gotham_middleware_diesel::Repo;
+use std::env;
+use dotenv::dotenv;
 
 const HELLO_WORLD: &str = "Hello world!";
 
@@ -23,7 +27,10 @@ pub fn say_hello(state: State) -> (State, &'static str) {
 pub fn main() {
     let addr = "127.0.0.1:7878";
     println!("Listening for requests at http://{}", addr);
-    gotham::start(addr, router())
+    dotenv();
+    let database_url = env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set.");
+    gotham::start(addr, router(Repo::new(&database_url)));
 }
 
 #[cfg(test)]

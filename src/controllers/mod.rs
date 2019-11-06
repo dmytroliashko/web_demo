@@ -4,7 +4,7 @@ use gotham::helpers::http::response::create_response;
 
 pub mod post;
 
-pub fn index(mut state: State) -> (State, Response<Body>) {
+pub fn index(state: State) -> (State, Response<Body>) {
     let body = "<html><body><h1>Hello Gotham page</h1></body></html>";
 
     let res = {

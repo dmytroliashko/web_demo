@@ -1,6 +1,5 @@
-extern crate serde;
-
-use serde::{Serialize, Deserialize};
+use diesel::{Insertable, Queryable};
+use serde_derive::{Deserialize, Serialize};
 
 #[derive(Queryable, Debug, Serialize, Deserialize)]
 pub struct Post {
@@ -12,9 +11,9 @@ pub struct Post {
 
 use super::schema::posts;
 
-#[derive(Insertable)]
+#[derive(Insertable, Deserialize)]
 #[table_name="posts"]
-pub struct NewPost<'a> {
-    pub title: &'a str,
-    pub body: &'a str,
+pub struct NewPost {
+    pub title: String,
+    pub body: String,
 }
