@@ -1,5 +1,6 @@
 use diesel::{Insertable, Queryable};
 use serde_derive::{Deserialize, Serialize};
+use super::schema::posts;
 
 #[derive(Queryable, Debug, Serialize, Deserialize)]
 pub struct Post {
@@ -8,8 +9,6 @@ pub struct Post {
     pub body: String,
     pub published: bool,
 }
-
-use super::schema::posts;
 
 #[derive(Insertable, Deserialize)]
 #[table_name="posts"]

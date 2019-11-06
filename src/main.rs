@@ -2,10 +2,10 @@ extern crate gotham;
 extern crate hyper;
 extern crate mime;
 extern crate dotenv;
+extern crate serde;
 
 #[macro_use]
 extern crate gotham_derive;
-extern crate serde;
 #[macro_use]
 extern crate serde_derive;
 
