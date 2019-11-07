@@ -27,7 +27,7 @@ pub fn say_hello(state: State) -> (State, &'static str) {
 pub fn main() {
     let addr = "127.0.0.1:7878";
     println!("Listening for requests at http://{}", addr);
-    dotenv();
+    dotenv().ok();
     let database_url = env::var("DATABASE_URL")
         .expect("DATABASE_URL must be set.");
     gotham::start(addr, router(Repo::new(&database_url)));

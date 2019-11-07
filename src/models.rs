@@ -1,6 +1,6 @@
+use super::schema::posts;
 use diesel::{Insertable, Queryable};
 use serde_derive::{Deserialize, Serialize};
-use super::schema::posts;
 
 #[derive(Queryable, Debug, Serialize, Deserialize)]
 pub struct Post {
