@@ -3,12 +3,13 @@ extern crate hyper;
 extern crate mime;
 
 use crate::controllers::*;
-use crate::controllers::post::{PostIdExtractor, Repo};
+use crate::controllers::post::{PostIdExtractor};
 use gotham::router::Router;
 use gotham::router::builder::{build_router, DrawRoutes, DefineSingleRoute};
 use gotham::pipeline::single::single_pipeline;
 use gotham::pipeline::new_pipeline;
 use gotham_middleware_diesel::DieselMiddleware;
+use crate::repositories::Repo;
 
 pub fn router(repo: Repo) -> Router {
     let (chain, pipeline) =

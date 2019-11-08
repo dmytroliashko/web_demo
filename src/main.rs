@@ -11,18 +11,12 @@ extern crate serde_derive;
 
 mod route;
 mod controllers;
+mod repositories;
 
-use gotham::state::State;
 use crate::route::router;
 use gotham_middleware_diesel::Repo;
 use std::env;
 use dotenv::dotenv;
-
-const HELLO_WORLD: &str = "Hello world!";
-
-pub fn say_hello(state: State) -> (State, &'static str) {
-    (state, HELLO_WORLD)
-}
 
 pub fn main() {
     let addr = "127.0.0.1:7878";
@@ -39,6 +33,13 @@ mod tests {
     use gotham::test::testServer;
     use hyper::StatusCode;
     use gotham::tls::test::TestServer;
+    use gotham::state::State;
+
+    const HELLO_WORLD: &str = "Hello world!";
+
+    pub fn say_hello(state: State) -> (State, &'static str) {
+        (state, HELLO_WORLD)
+    }
 
     #[test]
     fn receive_hello_world_response() {

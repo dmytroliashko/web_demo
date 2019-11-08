@@ -8,13 +8,13 @@ use gotham::handler::{HandlerFuture, HandlerError, IntoHandlerError};
 use futures::{future, Future, Stream};
 use std::str::from_utf8;
 use web_demo::schema::posts;
+use crate::repositories::Repo;
 
 pub fn index(state: State) -> (State, Response<Body>) {
     use web_demo::schema::posts::dsl::posts;
 
     let connection = establish_connection();
     let results = posts
-        .limit(5)
         .load::<Post>(&connection)
         .expect("Error loading posts");
 
@@ -74,7 +74,7 @@ pub fn get(state: State) -> (State, Response<Body>) {
     (state, res)
 }
 
-pub type Repo = gotham_middleware_diesel::Repo<MysqlConnection>;
+
 
 #[derive(Serialize)]
 struct RowsUpdated {
